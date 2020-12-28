@@ -30,5 +30,4 @@ public class UserController {
         res.put("success", true);
         return res;
     }
-
 }
