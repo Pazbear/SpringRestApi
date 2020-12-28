@@ -22,16 +22,8 @@ public class UserController {
         return res;
     }
 
-    /*
-    @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Map<String, Boolean> saveUser(@RequestBody UserDto userDto){
-        Map<String, Boolean> res = new HashMap<>();
-        userService.saveUser(userDto);
-        res.put("success", true);
-        return res;
-    }*/
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
-    public String saveUser(@RequestBody UserDto userDto){
+    public String saveUser (@RequestBody UserDto userDto){
         return userService.saveUser(userDto);
     }
 
@@ -40,4 +32,13 @@ public class UserController {
         return userService.findById(userDto.getId());
     }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update (@RequestBody UserUpdateRequestDto requestDto) {
+        return userService.update(requestDto.getId(), requestDto);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String delete (@RequestBody UserDto userDto) {
+        return userService.delete(userDto.getId());
+    }
 }

@@ -36,4 +36,13 @@ public class User{
         this.status_msg = status_msg;
         this.friends_list = friends_list;
     }
+
+    public void update (String phone, String name, String profile_image, String background_image,
+                       String status_msg) {
+        this.phone = phone;
+        this.name = name;
+        this.profile_image = profile_image;
+        this.background_image = background_image;
+        this.status_msg = status_msg;
+    }
 }

@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
 public class UserResponseDto {
     private String id;
     private String phone;
@@ -15,7 +14,6 @@ public class UserResponseDto {
     private String status_msg;
     private String friends_list;
 
-    @Builder
     public UserResponseDto(User entity) {
         this.id = entity.getId();
         this.phone = entity.getPhone();
