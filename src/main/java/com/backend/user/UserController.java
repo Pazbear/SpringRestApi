@@ -3,10 +3,7 @@ package com.backend.user;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +12,9 @@ import java.util.Map;
 @AllArgsConstructor
 @RequestMapping(value = "/api/user")
 public class UserController {
+
     private UserService userService;
+
     @RequestMapping("/")
     public Map<String, String> Hello(){
         Map<String, String> res = new HashMap<String, String>();
@@ -23,11 +22,23 @@ public class UserController {
         return res;
     }
 
+    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
+    public String saveUser (@RequestBody UserDto userDto){
+        return userService.saveUser(userDto);
+    }
+
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public Map<String, Boolean> saveUser(@RequestBody UserDto userDto){
-        Map<String, Boolean> res = new HashMap<>();
-        userService.saveUser(userDto);
-        res.put("success", true);
-        return res;
+    public UserResponseDto findById (@RequestBody UserDto userDto) {
+        return userService.findById(userDto.getId());
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update (@RequestBody UserUpdateRequestDto requestDto) {
+        return userService.update(requestDto.getId(), requestDto);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String delete (@RequestBody UserDto userDto) {
+        return userService.delete(userDto.getId());
     }
 }

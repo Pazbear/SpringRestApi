@@ -12,6 +12,32 @@ public class UserService {
 
     @Transactional
     public String saveUser(UserDto userDto){
-        return userRepository.save(userDto.toEntity()).getId();
+        return userRepository.save(userDto.toEntity()).getId() + " Creation Completed";
+    }
+
+    public UserResponseDto findById (String id) {
+        User entity = userRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException(id + " Not Found"));
+
+        return new UserResponseDto(entity);
+    }
+
+    @Transactional
+    public String update (String id, UserUpdateRequestDto requestDto) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException(id + " Not Found"));
+
+        user.update(requestDto.getPhone(), requestDto.getName(), requestDto.getProfile_image(),
+                requestDto.getBackground_image(), requestDto.getStatus_msg());
+        return "ID " + id + " Update Complete";
+    }
+
+    @Transactional
+    public String delete (String id) {
+        User user = userRepository.findById(id).orElseThrow(() ->
+                new IllegalArgumentException(id + " Not Found"));
+
+        userRepository.delete(user);
+        return id + " Deletion Completed";
     }
 }

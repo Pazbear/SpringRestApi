@@ -13,15 +13,13 @@ import javax.persistence.Table;
 @Getter
 @Entity
 public class User{
+
     @Id
     private String id; //PK
-
     @NotNull
     private String phone;
-
     @NotNull
     private String name;
-
     private String profile_image;
     private String background_image;
     private String status_msg;
@@ -37,5 +35,14 @@ public class User{
         this.background_image = background_image;
         this.status_msg = status_msg;
         this.friends_list = friends_list;
+    }
+
+    public void update (String phone, String name, String profile_image, String background_image,
+                       String status_msg) {
+        this.phone = phone;
+        this.name = name;
+        this.profile_image = profile_image;
+        this.background_image = background_image;
+        this.status_msg = status_msg;
     }
 }
