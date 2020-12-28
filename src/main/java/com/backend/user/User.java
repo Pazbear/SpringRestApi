@@ -13,15 +13,13 @@ import javax.persistence.Table;
 @Getter
 @Entity
 public class User{
+
     @Id
     private String id; //PK
-
     @NotNull
     private String phone;
-
     @NotNull
     private String name;
-
     private String profile_image;
     private String background_image;
     private String status_msg;
