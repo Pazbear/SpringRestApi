@@ -36,6 +36,16 @@ dependencies {
 
     // AWS S3
     compile group: 'org.springframework.cloud', name: 'spring-cloud-aws', version: '2.2.1.RELEASE', ext: 'pom'
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-aws
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-aws', version: '2.2.5.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws-context
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-context', version: '2.2.5.RELEASE'
+
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws-autoconfigure
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-autoconfigure', version: '2.2.5.RELEASE'
+
 }
 test {
     useJUnitPlatform()
