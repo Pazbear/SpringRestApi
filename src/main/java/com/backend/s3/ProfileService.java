@@ -20,13 +20,19 @@ public class ProfileService {
         Map<String, Boolean> res = new HashMap<>();
         try {
             if (multipartFile != null) {
-                profileModel.setProfileURL(s3FileUploadService.upload(multipartFile));
+                String url = s3FileUploadService.upload(multipartFile);
+                if (url != null) {
+                    profileModel.setProfileURL(url);
+                    res.put("Success1", true);
+                } else {
+                    res.put("Success2", false);
+                }
+            }else{
+                res.put("Success3", false);
             }
-            res.put("Success", true);
-
             return res;
         } catch (Exception e) {
-            res.put("Success", false);
+            res.put("Success4", false);
 
             return res;
         }

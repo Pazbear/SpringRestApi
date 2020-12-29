@@ -12,9 +12,10 @@ public class UserService {
 
     @Transactional
     public String saveUser(UserDto userDto){
-        return userRepository.save(userDto.toEntity()).getId() + " Creation Completed";
+        return userRepository.save(userDto.toEntity()).getId();
     }
 
+    @Transactional
     public UserResponseDto findById (String id) {
         User entity = userRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException(id + " Not Found"));

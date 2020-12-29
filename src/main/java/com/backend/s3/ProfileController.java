@@ -20,7 +20,7 @@ public class ProfileController {
     }
 
     @RequestMapping("/save")
-    public ResponseEntity saveProfiel(ProfileModel profileModel, @RequestPart(value="profile",
+    public ResponseEntity saveProfile(ProfileModel profileModel, @RequestPart(value="profile",
             required = false) final MultipartFile multipartFile) {
         try {
             return new ResponseEntity(profileService.profileSave(profileModel, multipartFile), HttpStatus.OK);

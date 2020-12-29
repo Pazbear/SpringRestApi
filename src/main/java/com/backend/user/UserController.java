@@ -28,8 +28,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/get", method = RequestMethod.POST)
-    public UserResponseDto findById (@RequestBody UserDto userDto) {
-        return userService.findById(userDto.getId());
+    public String findById (@RequestBody UserDto userDto) {
+        return userService.findById(userDto.getId()).toString();
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

@@ -23,4 +23,17 @@ public class UserResponseDto {
         this.status_msg = entity.getStatus_msg();
         this.friends_list = entity.getFriends_list();
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\":\"" + id + '\"' +
+                ", \"phone\":\"" + phone + '\"' +
+                ", \"name\":\"" + name + '\"' +
+                ", \"profile_image\":\"" + profile_image + '\"' +
+                ", \"background_image\":\"" + background_image + '\"' +
+                ", \"status_msg\":\"" + status_msg + '\"' +
+                ", \"friends_list\":\"" + friends_list + '\"' +
+                '}';
+    }
 }
