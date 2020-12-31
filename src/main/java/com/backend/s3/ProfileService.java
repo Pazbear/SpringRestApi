@@ -1,6 +1,5 @@
 package com.backend.s3;
 
-import lombok.Builder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,10 +19,18 @@ public class ProfileService {
         Map<String, Boolean> res = new HashMap<>();
         try {
             if (multipartFile != null) {
-                profileModel.setProfileURL(s3FileUploadService.upload(multipartFile));
+                String url = s3FileUploadService.upload(multipartFile);
+                if (url == null) {
+                    res.put("Success", false);
+                }
+                else {
+                    profileModel.setProfileURL(url);
+                    res.put("Success", true);
+                }
             }
-            res.put("Success", true);
-
+            else {
+                res.put("Success", false);
+            }
             return res;
         } catch (Exception e) {
             res.put("Success", false);
