@@ -48,7 +48,7 @@ public class S3FileUploadService {
             File file = new File(System.getProperty("user.dir") + saveFileName);
             uploadFile.transferTo(file);
             uploadOnS3(saveFileName, file);
-            url = defaultUrl + '/' + saveFileName; //url 리턴 수정(디렉토리와 파일사이 '/' 없음)
+            url = defaultUrl + '/' + saveFileName;
             file.delete();
         } catch (StringIndexOutOfBoundsException e) {
             url = null;
@@ -78,7 +78,6 @@ public class S3FileUploadService {
     public void deleteObject(String url) throws AmazonClientException {
         String key = url.substring(url.lastIndexOf('/') + 1);
 
-        //key에 해당하는 파일이 없을경우 exception을 throw함
         amazonS3Client.getObject(new GetObjectRequest(bucket, key));
         amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, key));
     }
