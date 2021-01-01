@@ -1,8 +1,7 @@
-package com.backend.user;
+package com.backend.dto;
 
-import lombok.Builder;
+import com.backend.dao.User;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public class UserResponseDto {
@@ -22,5 +21,18 @@ public class UserResponseDto {
         this.background_image = entity.getBackground_image();
         this.status_msg = entity.getStatus_msg();
         this.friends_list = entity.getFriends_list();
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\":\"" + id + '\"' +
+                ", \"phone\":\"" + phone + '\"' +
+                ", \"name\":\"" + name + '\"' +
+                ", \"profile_image\":\"" + profile_image + '\"' +
+                ", \"background_image\":\"" + background_image + '\"' +
+                ", \"status_msg\":\"" + status_msg + '\"' +
+                ", \"friends_list\":\"" + friends_list + '\"' +
+                '}';
     }
 }

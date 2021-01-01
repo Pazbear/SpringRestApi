@@ -1,4 +1,4 @@
-package com.backend.user;
+package com.backend.dao;
 
 import com.sun.istack.NotNull;
 import lombok.*;

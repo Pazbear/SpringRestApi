@@ -1,10 +1,8 @@
-package com.backend.user;
+package com.backend.repository;
 
-import lombok.RequiredArgsConstructor;
+import com.backend.dao.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
