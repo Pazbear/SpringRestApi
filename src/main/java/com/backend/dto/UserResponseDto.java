@@ -1,8 +1,7 @@
-package com.backend.user;
+package com.backend.dto;
 
-import lombok.Builder;
+import com.backend.dao.User;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public class UserResponseDto {

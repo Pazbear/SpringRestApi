@@ -1,6 +1,6 @@
-package com.backend.user;
+package com.backend.dto;
 
-import com.sun.istack.NotNull;
+import com.backend.dao.User;
 import lombok.*;
 
 @Getter

@@ -1,9 +1,14 @@
-package com.backend.s3;
+package com.backend.api;
 
 
 import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.transfer.TransferManager;
 import com.amazonaws.services.s3.transfer.Upload;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +48,7 @@ public class S3FileUploadService {
             File file = new File(System.getProperty("user.dir") + saveFileName);
             uploadFile.transferTo(file);
             uploadOnS3(saveFileName, file);
-            url = defaultUrl + saveFileName;
+            url = defaultUrl + '/' + saveFileName; //url 리턴 수정(디렉토리와 파일사이 '/' 없음)
             file.delete();
         } catch (StringIndexOutOfBoundsException e) {
             url = null;
@@ -68,5 +73,13 @@ public class S3FileUploadService {
         } catch (InterruptedException e) {
             log.error(e.getMessage());
         }
+    }
+
+    public void deleteObject(String url) throws AmazonClientException {
+        String key = url.substring(url.lastIndexOf('/') + 1);
+
+        //key에 해당하는 파일이 없을경우 exception을 throw함
+        amazonS3Client.getObject(new GetObjectRequest(bucket, key));
+        amazonS3Client.deleteObject(new DeleteObjectRequest(bucket, key));
     }
 }

@@ -1,5 +1,7 @@
-package com.backend.s3;
+package com.backend.controller;
 
+import com.backend.model.ProfileModel;
+import com.backend.service.ProfileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,17 @@ public class ProfileController {
             required = false) final MultipartFile multipartFile) {
         try {
             return new ResponseEntity(profileService.profileSave(profileModel, multipartFile), HttpStatus.OK);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    @RequestMapping("/delete")
+    public ResponseEntity deleteProfile(ProfileModel profileModel) {
+        try {
+            return new ResponseEntity(profileService.profileDelete(profileModel), HttpStatus.OK);
         } catch (Exception e) {
             log.error(e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);

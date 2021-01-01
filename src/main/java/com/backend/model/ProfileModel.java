@@ -1,4 +1,4 @@
-package com.backend.s3;
+package com.backend.model;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 

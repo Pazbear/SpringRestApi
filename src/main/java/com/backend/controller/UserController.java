@@ -1,8 +1,9 @@
-package com.backend.user;
+package com.backend.controller;
 
+import com.backend.dto.UserDto;
+import com.backend.service.UserService;
+import com.backend.dto.UserUpdateRequestDto;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
