@@ -1,8 +1,8 @@
 package com.backend.controller;
 
-import com.backend.dto.UserDto;
+import com.backend.dto.user.UserDto;
 import com.backend.service.UserService;
-import com.backend.dto.UserUpdateRequestDto;
+import com.backend.dto.user.UserUpdateRequestDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

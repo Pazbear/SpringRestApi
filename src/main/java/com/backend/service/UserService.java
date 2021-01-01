@@ -1,10 +1,10 @@
 package com.backend.service;
 
 import com.backend.dao.User;
-import com.backend.dto.UserDto;
-import com.backend.dto.UserResponseDto;
+import com.backend.dto.user.UserDto;
+import com.backend.dto.user.UserResponseDto;
 import com.backend.repository.UserRepository;
-import com.backend.dto.UserUpdateRequestDto;
+import com.backend.dto.user.UserUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
