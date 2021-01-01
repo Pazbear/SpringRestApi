@@ -24,7 +24,7 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class S3FileUploadService {
+public class S3FileManageApi {
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
@@ -34,7 +34,7 @@ public class S3FileUploadService {
 
     private final AmazonS3Client amazonS3Client;
 
-    public S3FileUploadService(AmazonS3Client amazonS3Client) {
+    public S3FileManageApi(AmazonS3Client amazonS3Client) {
         this.amazonS3Client = amazonS3Client;
     }
 

@@ -1,10 +1,8 @@
 package com.backend.service;
 
 import com.amazonaws.AmazonClientException;
-import com.amazonaws.AmazonServiceException;
-import com.amazonaws.SdkClientException;
 import com.backend.model.ProfileModel;
-import com.backend.api.S3FileUploadService;
+import com.backend.api.S3FileManageApi;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,9 +12,9 @@ import java.util.Map;
 @Service
 public class ProfileService {
 
-    private final S3FileUploadService s3FileUploadService;
+    private final S3FileManageApi s3FileUploadService;
 
-    public ProfileService(S3FileUploadService s3FileUploadService) {
+    public ProfileService(S3FileManageApi s3FileUploadService) {
         this.s3FileUploadService = s3FileUploadService;
     }
 
