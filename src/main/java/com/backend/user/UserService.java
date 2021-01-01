@@ -19,7 +19,6 @@ public class UserService {
     public UserResponseDto findById (String id) {
         User entity = userRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException(id + " Not Found"));
-
         return new UserResponseDto(entity);
     }
 
