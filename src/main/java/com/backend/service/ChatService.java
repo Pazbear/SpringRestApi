@@ -1,15 +1,15 @@
 package com.backend.service;
 
 
-import com.backend.dto.chat.ChatRoom;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.backend.dao.ChatRoom;
+import com.backend.dto.chat.ChatRoomDto;
+import com.backend.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.*;
 
@@ -18,30 +18,37 @@ import java.util.*;
 @Service
 public class ChatService {
 
-    private final ObjectMapper objectMapper;
-    private Map<String, ChatRoom> chatRooms;
+    private final ChatRoomRepository chatRoomRepository;
 
-    @PostConstruct
-    private void init(){
-        chatRooms = new LinkedHashMap<>();
+
+    public List<ChatRoomDto> findAllRoom(){
+        List<ChatRoomDto> chatRoomDtos = new ArrayList<>();
+        List<ChatRoom> chatRooms = chatRoomRepository.findAll();
+        for (ChatRoom chatRoom : chatRooms) {
+            chatRoomDtos.add(new ChatRoomDto(chatRoom));
+        }
+        return chatRoomDtos;
     }
 
-    public List<ChatRoom> findAllRoom(){
-        return new ArrayList<>(chatRooms.values());
+    public ChatRoomDto findRoomById(String roomId){
+        ChatRoom entity = chatRoomRepository.findById(roomId).orElseThrow(() ->
+                new IllegalArgumentException(roomId + " Not Found"));
+        return new ChatRoomDto(entity);
     }
 
-    public ChatRoom findRoomById(String roomId){
-        return chatRooms.get(roomId);
-    }
-
-    public ChatRoom createRoom(String name){
-        String randomId = UUID.randomUUID().toString();
-        ChatRoom chatRoom = ChatRoom.builder()
-                .roomId(randomId)
-                .name(name)
-                .build();
-        chatRooms.put(randomId,chatRoom);
-        return chatRoom;
+    public Map<String ,String> createRoom(ChatRoomDto chatRoomCreateDto){
+        Map<String, String> res = new HashMap<>();
+        try {
+            String randomId = UUID.randomUUID().toString();
+            chatRoomCreateDto.setUrlId(randomId);
+            String urlId = chatRoomRepository.save(chatRoomCreateDto.toEntity()).getUrlId();
+            res.put("success", "true");
+            res.put("urlId", urlId);
+        }catch(Exception e){
+            log.error(e.getMessage());
+            res.put("success", "false");
+        }
+        return res;
     }
 
     public <T> void sendMessage(WebSocketSession session, T message){

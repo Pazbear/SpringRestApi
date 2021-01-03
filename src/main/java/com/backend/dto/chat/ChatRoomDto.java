@@ -1,27 +1,34 @@
 package com.backend.dto.chat;
 
+import com.backend.dao.ChatRoom;
 import com.backend.service.ChatService;
-import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.socket.WebSocketSession;
 
-import java.util.HashSet;
-import java.util.Set;
+@Getter
+@Setter
+public class ChatRoomDto {
+    private String id;
+    private String urlId;
 
-public class ChatRoom {
-    private String roomId;
-    private String name;
-    private Set<WebSocketSession> sessions = new HashSet<>();
+    public ChatRoomDto(ChatRoom entity){
+        this.id = entity.getId();
+        this.urlId = entity.getUrlId();
+    }
 
-    @Builder
-    public ChatRoom(String roomId, String name){
-        this.roomId = roomId;
-        this.name = name;
+    public ChatRoom toEntity(){
+        return ChatRoom.builder()
+                .id(id)
+                .urlId(urlId)
+                .build();
     }
 
     public void handleActions(WebSocketSession session, ChatMessage chatMessage,
                               ChatService chatService){
         if(chatMessage.getType().equals(ChatMessage.MessageType.ENTER)){
-            sessions.add(session);
             chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다.");
         }
         sendMessage(chatMessage, chatService);

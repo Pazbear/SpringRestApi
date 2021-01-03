@@ -1,7 +1,7 @@
 package com.backend.handler;
 
 import com.backend.dto.chat.ChatMessage;
-import com.backend.dto.chat.ChatRoom;
+import com.backend.dto.chat.ChatRoomDto;
 import com.backend.service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class WebSocketChatHandler extends TextWebSocketHandler {
         String payload = message.getPayload();
         log.info("payload {}", payload);
         ChatMessage chatMessage = objectMapper.readValue(payload, ChatMessage.class);
-        ChatRoom room = chatService.findRoomById(chatMessage.getRoomId());
+        ChatRoomDto room = chatService.findRoomById(chatMessage.getRoomId());
         room.handleActions(session, chatMessage, chatService);
     }
 }
