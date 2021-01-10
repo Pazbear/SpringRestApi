@@ -47,6 +47,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws-autoconfigure
     compile group: 'org.springframework.cloud', name: 'spring-cloud-aws-autoconfigure', version: '2.2.5.RELEASE'
 
+    //coolSMS Service
+    compile group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 }
 test {
     useJUnitPlatform()

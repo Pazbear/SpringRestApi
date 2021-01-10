@@ -1,7 +1,7 @@
 package com.backend.controller;
 
-import com.backend.model.ProfileModel;
-import com.backend.service.ProfileService;
+import com.backend.model.S3FileManageModel;
+import com.backend.service.S3FileManageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +13,19 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @RestController
 @RequestMapping("/profile")
-public class ProfileController {
+public class S3FileManageController {
 
-    private final ProfileService profileService;
+    private final S3FileManageService s3FileManageService;
 
-    public ProfileController(ProfileService profileService) {
-        this.profileService = profileService;
+    public S3FileManageController(S3FileManageService s3FileManageService) {
+        this.s3FileManageService = s3FileManageService;
     }
 
     @RequestMapping("/save")
-    public ResponseEntity saveProfile(ProfileModel profileModel, @RequestPart(value="profile",
+    public ResponseEntity saveProfile(S3FileManageModel s3FileManageModel, @RequestPart(value="profile",
             required = false) final MultipartFile multipartFile) {
         try {
-            return new ResponseEntity(profileService.profileSave(profileModel, multipartFile), HttpStatus.OK);
+            return new ResponseEntity(s3FileManageService.profileSave(s3FileManageModel, multipartFile), HttpStatus.OK);
         } catch (Exception e) {
             log.error(e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -34,9 +34,9 @@ public class ProfileController {
 
 
     @RequestMapping("/delete")
-    public ResponseEntity deleteProfile(ProfileModel profileModel) {
+    public ResponseEntity deleteProfile(S3FileManageModel s3FileManageModel) {
         try {
-            return new ResponseEntity(profileService.profileDelete(profileModel), HttpStatus.OK);
+            return new ResponseEntity(s3FileManageService.profileDelete(s3FileManageModel), HttpStatus.OK);
         } catch (Exception e) {
             log.error(e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
