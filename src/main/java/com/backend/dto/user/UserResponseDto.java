@@ -1,4 +1,4 @@
-package com.backend.dto;
+package com.backend.dto.user;
 
 import com.backend.dao.User;
 import lombok.Getter;
@@ -12,6 +12,7 @@ public class UserResponseDto {
     private String background_image;
     private String status_msg;
     private String friends_list;
+    private String token;
 
     public UserResponseDto(User entity) {
         this.id = entity.getId();
@@ -21,6 +22,7 @@ public class UserResponseDto {
         this.background_image = entity.getBackground_image();
         this.status_msg = entity.getStatus_msg();
         this.friends_list = entity.getFriends_list();
+        this.token = entity.getToken();
     }
 
     @Override
