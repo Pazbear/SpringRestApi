@@ -3,3 +3,4 @@ build/
 .idea
 src/main/resources/application.properties
 src/main/resources/chatapp-a063d-firebase-adminsdk-9w5sd-923daaeaed.json
+src/main/java/com/backend/PrivateInfo.java
