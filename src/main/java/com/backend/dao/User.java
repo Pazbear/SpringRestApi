@@ -24,10 +24,11 @@ public class User{
     private String background_image;
     private String status_msg;
     private String friends_list;
+    private String token;
 
     @Builder
     public User(String id, String phone, String name, String profile_image, String background_image,
-                String status_msg, String friends_list){
+                String status_msg, String friends_list,String token){
         this.id = id;
         this.phone = phone;
         this.name = name;
@@ -35,6 +36,7 @@ public class User{
         this.background_image = background_image;
         this.status_msg = status_msg;
         this.friends_list = friends_list;
+        this.token = token;
     }
 
     public void update (String phone, String name, String profile_image, String background_image,

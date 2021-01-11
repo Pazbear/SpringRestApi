@@ -15,6 +15,7 @@ public class UserDto {
     private String background_image;
     private String status_msg;
     private String friends_list;
+    private String token;
 
     public User toEntity(){
         return User.builder()
@@ -25,6 +26,7 @@ public class UserDto {
                 .background_image(background_image)
                 .status_msg(status_msg)
                 .friends_list(friends_list)
+                .token(token)
                 .build();
     }
 

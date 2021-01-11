@@ -17,12 +17,12 @@ public class ChatRoom {
     private String id;
 
     @Column
-    private String urlId;
+    private String url_id;
 
     @Builder
-    public ChatRoom(String id, String urlId){
+    public ChatRoom(String id, String url_id){
         this.id = id;
-        this.urlId = urlId;
+        this.url_id = url_id;
     }
 
 }

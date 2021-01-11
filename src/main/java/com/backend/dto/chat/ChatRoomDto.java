@@ -10,31 +10,20 @@ import org.springframework.web.socket.WebSocketSession;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class ChatRoomDto {
     private String id;
-    private String urlId;
+    private String url_id;
 
     public ChatRoomDto(ChatRoom entity){
         this.id = entity.getId();
-        this.urlId = entity.getUrlId();
+        this.url_id = entity.getUrl_id();
     }
 
     public ChatRoom toEntity(){
         return ChatRoom.builder()
                 .id(id)
-                .urlId(urlId)
+                .url_id(url_id)
                 .build();
-    }
-
-    public void handleActions(WebSocketSession session, ChatMessage chatMessage,
-                              ChatService chatService){
-        if(chatMessage.getType().equals(ChatMessage.MessageType.ENTER)){
-            chatMessage.setMessage(chatMessage.getSender() + "님이 입장했습니다.");
-        }
-        sendMessage(chatMessage, chatService);
-    }
-
-    public <T> void sendMessage(T message, ChatService chatService){
-        sessions.parallelStream().forEach(session -> chatService.sendMessage(session, message));
     }
 }

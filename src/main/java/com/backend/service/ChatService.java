@@ -36,12 +36,12 @@ public class ChatService {
         return new ChatRoomDto(entity);
     }
 
-    public Map<String ,String> createRoom(ChatRoomDto chatRoomCreateDto){
+    public Map<String ,String> createRoom(ChatRoomDto chatRoomDto){
         Map<String, String> res = new HashMap<>();
         try {
-            String randomId = UUID.randomUUID().toString();
-            chatRoomCreateDto.setUrlId(randomId);
-            String urlId = chatRoomRepository.save(chatRoomCreateDto.toEntity()).getUrlId();
+            String randomId = UUID.randomUUID().toString().substring(2, 12);
+            chatRoomDto.setUrl_id(randomId);
+            String urlId = chatRoomRepository.save(chatRoomDto.toEntity()).getUrl_id();
             res.put("success", "true");
             res.put("urlId", urlId);
         }catch(Exception e){
@@ -49,13 +49,5 @@ public class ChatService {
             res.put("success", "false");
         }
         return res;
-    }
-
-    public <T> void sendMessage(WebSocketSession session, T message){
-        try{
-            session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
-        }catch (IOException e){
-            log.error(e.getMessage(), e);
-        }
     }
 }
